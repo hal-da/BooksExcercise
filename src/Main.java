@@ -12,16 +12,31 @@ public class Main {
         Publisher oldenburgVerlag = new Publisher("Oldenburg Verlag", address);
 
         Book analyseUndDesignUML = new Book.Builder("Analyse und Design mit der UML 2.5")
+                .setSubtitle("Objektorientierte Softwareentwicklung")
+                .setEdition(1)
+                .setIsbn("978-3-486-72140-9")
                 .addAuthor(berndOestereicher)
                 .setCondition(Book.Condition.NEW)
                 .setFormat(Book.Format.HARDCOVER)
+                .setLanguage(Book.Language.DE)
+                .setPublisher(oldenburgVerlag)
+                .addIllustrator(stefanWestphal)
+                .setPrice(89.90)
+                .setTopic("UML")
+                .build();
+
+        Book analyseUndDesignUML2 = new Book.Builder("Analyse und Design mit der UML 3")
+                .addAuthor(berndOestereicher)
+                .addAuthor(axelScheithauer)
+                .setCondition(Book.Condition.NEW)
+                .setFormat(Book.Format.HARDCOVER)
                 .setSubtitle("Objektorientierte Softwareentwicklung")
-                .setEdition(1)
+                .setEdition(2)
                 .setIsbn("978-3-486-72140-9")
                 .setPublisher(oldenburgVerlag)
                 .setLanguage(Book.Language.DE)
                 .addIllustrator(stefanWestphal)
-                .setPrice(89.90)
+                .setPrice(189.90)
                 .setTopic("UML")
                 .build();
 
@@ -41,17 +56,27 @@ public class Main {
 
 
         //bookshelf
+        //add Books
         BookShelf bookShelf = new BookShelf();
         System.out.println("Empty Shelf: \n" + bookShelf);
         bookShelf.addBook(emptyBook);
         bookShelf.addBook(emptyBook);
         bookShelf.addBook(analyseUndDesignUML);
+        bookShelf.addBook(analyseUndDesignUML2);
+        System.out.println("Added a few books: \n" + bookShelf);
 
-        System.out.println("Addes a few books: \n" + bookShelf);
+        //remove books
         bookShelf.removeBook(emptyBook);
         bookShelf.removeBook(emptyBook);
         bookShelf.removeBook(emptyBook);
         System.out.println("Removed EmptyBook: \n" + bookShelf);
+
+        //search for Books
+        System.out.println(bookShelf.searchForAuthor(berndOestereicher) + " found books via bookshelf.earchForAuthor(Author)");
+
+        System.out.println(bookShelf.searchForAuthorLastName("Öste") + " found books via bookshelf.earchForAuthor(String)");
+
+        System.out.println(bookShelf.searchForTitle("uml") + " found books via bookshelf.earchForTitle(String)");
 
         //SortedBooks
         SortedBooks sortedBooks = new SortedBooks();
@@ -76,7 +101,7 @@ public class Main {
         System.out.println("\naNewOrder - sorted via Collections.sort(book.author.lastname");
         ArrayList<Book> aNewOrder =  new ArrayList<>(sortedBooks.getBooks());
         /*
-        so lt. Aufgabe, i guess:
+        vermutlich so lt. Aufgabe:
 
         Collections.sort(aNewOrder, new Comparator<Book>() {
             @Override

@@ -10,7 +10,7 @@ public class SortedBooks {
 
     public void addBook(Book book){
         if(!books.contains(book)) books.add(book);
-        else System.out.println("Book already in collection");
+        else System.out.println("\nBook already in collection");
     }
 
     public TreeSet<Book> getBooks() {
